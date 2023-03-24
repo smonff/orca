@@ -44,7 +44,7 @@ function Client () {
 
     this.theme.default = { background: '#000000', f_high: '#ffffff', f_med: '#777777', f_low: '#444444', f_inv: '#000000', b_high: '#eeeeee', b_med: '#72dec2', b_low: '#444444', b_inv: '#ffb545' }
 
-    this.acels.set('File', 'New', 'CmdOrCtrl+N', () => { this.reset() })
+    this.acels.set('File', 'New', 'CmdOrCtrl+Shift+N', () => { this.reset() })
     this.acels.set('File', 'Open', 'CmdOrCtrl+O', () => { this.source.open('orca', this.whenOpen, true) })
     this.acels.set('File', 'Import Modules', 'CmdOrCtrl+L', () => { this.source.load('orca') })
     this.acels.set('File', 'Export', 'CmdOrCtrl+S', () => { this.source.write('orca', 'orca', `${this.orca}`, 'text/plain') })
@@ -69,19 +69,21 @@ function Client () {
     this.acels.set('Edit', 'Drag West(Leap)', 'CmdOrCtrl+Alt+ArrowLeft', () => { this.cursor.drag(-this.grid.w, 0) })
 
     this.acels.set('Project', 'Find', 'CmdOrCtrl+J', () => { this.commander.start('find:') })
-    this.acels.set('Project', 'Inject', 'CmdOrCtrl+B', () => { this.commander.start('inject:') })
+    this.acels.set('Project', 'Inject', 'CmdOrCtrl+Shift+B', () => { this.commander.start('inject:') })
     this.acels.set('Project', 'Toggle Commander', 'CmdOrCtrl+K', () => { this.commander.start() })
     this.acels.set('Project', 'Run Commander', 'Enter', () => { this.commander.run() })
 
     this.acels.set('Cursor', 'Toggle Insert Mode', 'CmdOrCtrl+I', () => { this.cursor.ins = !this.cursor.ins })
     this.acels.set('Cursor', 'Toggle Block Comment', 'CmdOrCtrl+/', () => { this.cursor.comment() })
-    this.acels.set('Cursor', 'Trigger Operator', 'CmdOrCtrl+P', () => { this.cursor.trigger() })
+    this.acels.set('Cursor', 'Trigger Operator', 'CmdOrCtrl+Shift+P', () => { this.cursor.trigger() })
     this.acels.set('Cursor', 'Reset', 'Escape', () => { this.toggleGuide(false); this.commander.stop(); this.clear(); this.clock.isPaused = false; this.cursor.reset() })
 
-    this.acels.set('Move', 'Move North', 'ArrowUp', () => { this.cursor.move(0, 1) })
-    this.acels.set('Move', 'Move East', 'ArrowRight', () => { this.cursor.move(1, 0) })
-    this.acels.set('Move', 'Move South', 'ArrowDown', () => { this.cursor.move(0, -1) })
-    this.acels.set('Move', 'Move West', 'ArrowLeft', () => { this.cursor.move(-1, 0) })
+    // Replaced the Arrow(Left|Right|Down|Up) by some Emacs style accelerators.
+    // Best thing would be to have those configurable
+    this.acels.set('Move', 'Move North', 'CmdOrCtrl+P', () => { this.cursor.move(0, 1) })
+    this.acels.set('Move', 'Move East', 'CmdOrCtrl+F', () => { this.cursor.move(1, 0) })
+    this.acels.set('Move', 'Move South', 'CmdOrCtrl+N', () => { this.cursor.move(0, -1) })
+    this.acels.set('Move', 'Move West', 'CmdOrCtrl+B', () => { this.cursor.move(-1, 0) })
     this.acels.set('Move', 'Move North(Leap)', 'CmdOrCtrl+ArrowUp', () => { this.cursor.move(0, this.grid.h) })
     this.acels.set('Move', 'Move East(Leap)', 'CmdOrCtrl+ArrowRight', () => { this.cursor.move(this.grid.w, 0) })
     this.acels.set('Move', 'Move South(Leap)', 'CmdOrCtrl+ArrowDown', () => { this.cursor.move(0, -this.grid.h) })
@@ -96,7 +98,7 @@ function Client () {
     this.acels.set('Move', 'Scale West(Leap)', 'CmdOrCtrl+Shift+ArrowLeft', () => { this.cursor.scale(-this.grid.w, 0) })
 
     this.acels.set('Clock', 'Play/Pause', 'Space', () => { if (this.cursor.ins) { this.cursor.move(1, 0) } else { this.clock.togglePlay(false) } })
-    this.acels.set('Clock', 'Frame By Frame', 'CmdOrCtrl+F', () => { this.clock.touch() })
+    this.acels.set('Clock', 'Frame By Frame', 'CmdOrCtrl+Shift+F', () => { this.clock.touch() })
     this.acels.set('Clock', 'Reset Frame', 'CmdOrCtrl+Shift+R', () => { this.clock.setFrame(0) })
     this.acels.set('Clock', 'Incr. Speed', '>', () => { this.clock.modSpeed(1) })
     this.acels.set('Clock', 'Decr. Speed', '<', () => { this.clock.modSpeed(-1) })
