@@ -1,0 +1,12 @@
+Revision history for Orca ARM64
+
+0.1.1 2023-03-24T18:12:12Z
+  - Add support for ARM64 architecture builds
+  - Orca will display fullscreen by default
+  - Provide a script to launch the Orca executable file with --no-sandbox option
+  - Update npm start command to tell electron to start with sandbox disabled
+  - General libraries upgrade
+  - Add Changes file
+
+0.1.0
+  - Upstream version from Hundred Rabbits
